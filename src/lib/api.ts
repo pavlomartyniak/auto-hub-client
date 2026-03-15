@@ -8,10 +8,9 @@ export const api = axios.create({
 
 // Interceptors keep cross-cutting concerns in one place (DRY)
 api.interceptors.request.use((config) => {
-  config.headers = {
-    ...config.headers,
-    "Content-Type": "application/json",
-  };
+  if (config.headers) {
+    config.headers.set("Content-Type", "application/json");
+  }
 
   return config;
 });
