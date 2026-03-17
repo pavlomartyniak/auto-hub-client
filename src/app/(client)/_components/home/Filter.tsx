@@ -26,7 +26,7 @@ import {
 import { TextField } from "@/components/ui/TextField";
 import { DatePicker } from "@/components/ui/DatePicker";
 
-export function HomeFilter() {
+export function Filter() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const theme = useTheme();
   // We consider "mobile" any screen smaller than 'md'
@@ -142,7 +142,7 @@ export function HomeFilter() {
         <Box sx={{ width: "100%" }}>
           <Button
             variant="outlined"
-            size="medium"
+            size="large"
             startIcon={<FilterListIcon />}
             onClick={() => setDrawerOpen(true)}
             sx={{
