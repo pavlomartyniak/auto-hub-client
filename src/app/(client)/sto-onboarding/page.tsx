@@ -7,6 +7,7 @@ import {
   Box,
   Card,
   CardContent,
+  Container,
   Divider,
   Grid,
   Typography,
@@ -111,101 +112,103 @@ export default function StoOnboardingPage() {
 
   return (
     <FormProvider {...form}>
-      <Box
-        width="100%"
-        display="flex"
-        flexDirection="column"
-        gap={isMobile ? 2 : 4}
-      >
-        {isMobile ? (
-          <Box overflow="scroll">
-            <ResponsiveStepper
-              steps={onboardingSteps}
-              activeStep={activeStep}
-              maxReachableStep={activeStep}
-              onChangeActiveStep={onChangeActiveStep}
-            />
-          </Box>
-        ) : null}
-
-        <Card
-          sx={{ flex: 1, height: "100%" }}
-          component="form"
-          onSubmit={form.handleSubmit(onSubmit)}
+      <Container sx={{ p: 4 }}>
+        <Box
+          width="100%"
+          display="flex"
+          flexDirection="column"
+          gap={isMobile ? 2 : 4}
         >
-          <Grid container sx={{ height: "100%" }}>
-            {!isMobile && (
-              <Grid size={4} sx={{ height: "100%" }} py={2}>
-                <Box
-                  display="flex"
-                  flexDirection="column"
-                  borderRight="1px solid"
-                  borderColor="grey.50"
-                  sx={{ height: "100%" }}
-                  px={4}
-                  py={2}
-                  gap={2}
-                >
-                  <Typography variant="h6">
-                    {onboardingSteps[activeStep].label}
-                  </Typography>
-                  <Divider />
-                  <ResponsiveStepper
-                    steps={onboardingSteps}
-                    activeStep={activeStep}
-                    maxReachableStep={activeStep}
-                    onChangeActiveStep={onChangeActiveStep}
-                  />
-                </Box>
-              </Grid>
-            )}
+          {isMobile ? (
+            <Box overflow="scroll">
+              <ResponsiveStepper
+                steps={onboardingSteps}
+                activeStep={activeStep}
+                maxReachableStep={activeStep}
+                onChangeActiveStep={onChangeActiveStep}
+              />
+            </Box>
+          ) : null}
 
-            <Grid
-              overflow="auto"
-              size={isMobile ? 12 : 8}
-              sx={{ height: "100%" }}
-              p={2}
-            >
-              <CardContent
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 4,
-                  height: "100%",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Box>{renderActiveStep()}</Box>
-
-                <Box display="flex" gap={2} alignSelf="end">
-                  <Button
-                    type="button"
-                    variant="outlined"
-                    sx={{ width: "fit-content" }}
-                    onClick={handleBack}
-                    disabled={activeStep === 0}
+          <Card
+            sx={{ flex: 1, height: "100%" }}
+            component="form"
+            onSubmit={form.handleSubmit(onSubmit)}
+          >
+            <Grid container sx={{ height: "100%" }}>
+              {!isMobile && (
+                <Grid size={4} sx={{ height: "100%" }} py={2}>
+                  <Box
+                    display="flex"
+                    flexDirection="column"
+                    borderRight="1px solid"
+                    borderColor="grey.50"
+                    sx={{ height: "100%" }}
+                    px={4}
+                    py={2}
+                    gap={2}
                   >
-                    Back
-                  </Button>
-                  {isLastStep ? (
-                    <Button type="submit" sx={{ width: "fit-content" }}>
-                      Submit
-                    </Button>
-                  ) : (
+                    <Typography variant="h6">
+                      {onboardingSteps[activeStep].label}
+                    </Typography>
+                    <Divider />
+                    <ResponsiveStepper
+                      steps={onboardingSteps}
+                      activeStep={activeStep}
+                      maxReachableStep={activeStep}
+                      onChangeActiveStep={onChangeActiveStep}
+                    />
+                  </Box>
+                </Grid>
+              )}
+
+              <Grid
+                overflow="auto"
+                size={isMobile ? 12 : 8}
+                sx={{ height: "100%" }}
+                p={2}
+              >
+                <CardContent
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 4,
+                    height: "100%",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Box>{renderActiveStep()}</Box>
+
+                  <Box display="flex" gap={2} alignSelf="end">
                     <Button
                       type="button"
+                      variant="outlined"
                       sx={{ width: "fit-content" }}
-                      onClick={handleNext}
+                      onClick={handleBack}
+                      disabled={activeStep === 0}
                     >
-                      Next Step
+                      Back
                     </Button>
-                  )}
-                </Box>
-              </CardContent>
+                    {isLastStep ? (
+                      <Button type="submit" sx={{ width: "fit-content" }}>
+                        Submit
+                      </Button>
+                    ) : (
+                      <Button
+                        type="button"
+                        sx={{ width: "fit-content" }}
+                        onClick={handleNext}
+                      >
+                        Next Step
+                      </Button>
+                    )}
+                  </Box>
+                </CardContent>
+              </Grid>
             </Grid>
-          </Grid>
-        </Card>
-      </Box>
+          </Card>
+        </Box>
+      </Container>
     </FormProvider>
   );
 }

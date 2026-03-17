@@ -1,12 +1,24 @@
-import React from "react";
-import { Container } from "@mui/material";
-import { HomeFilter } from "./_components/HomeFilter";
+import { Box, Container, Pagination } from "@mui/material";
+import SearchResults from "./_components/home/SearchResults";
 
 const Page = () => {
   return (
-    <Container maxWidth="lg">
-      <HomeFilter />
-    </Container>
+    <Box display="flex" flexDirection="column" gap={2}>
+      <Box bgcolor="common.white">
+        <Container
+          sx={{
+            flex: 1,
+            py: 4,
+            display: "flex",
+            flexDirection: "column",
+            gap: 4,
+          }}
+        >
+          <SearchResults />
+          <Pagination sx={{ placeSelf: "center" }} count={10} />
+        </Container>
+      </Box>
+    </Box>
   );
 };
 
