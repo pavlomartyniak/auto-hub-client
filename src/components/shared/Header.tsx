@@ -12,6 +12,7 @@ export function Header() {
   const pathname = usePathname();
 
   const isOnboarding = pathname === Routes.STO_ONBOARDING;
+  const isHome = pathname === Routes.HOME;
 
   const navigateHome = () => {
     router.push(Routes.HOME);
@@ -43,27 +44,30 @@ export function Header() {
               gap: 4,
             }}
           >
-            <Box display="flex" flexDirection="column" gap={1}>
-              <Typography
-                variant="h3"
-                fontWeight={900}
-                color="primary.main"
-                sx={{ fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" } }}
-              >
-                Book a car service online—it's quick and easy
-              </Typography>
-              <Typography
-                variant="h5"
-                fontWeight={700}
-                color="primary.main"
-                sx={{
-                  fontSize: { xs: "1.125rem", sm: "1.25rem", md: "1.5rem" },
-                }}
-              >
-                Compare offers from nearby auto repair shops: prices, reviews,
-                photos of work, and available appointments.
-              </Typography>
-            </Box>
+            {isHome && (
+              <Box display="flex" flexDirection="column" gap={1}>
+                <Typography
+                  variant="h3"
+                  fontWeight={900}
+                  color="primary.main"
+                  sx={{ fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" } }}
+                >
+                  Book a car service online—it's quick and easy
+                </Typography>
+                <Typography
+                  variant="h5"
+                  fontWeight={700}
+                  color="primary.main"
+                  sx={{
+                    fontSize: { xs: "1.125rem", sm: "1.25rem", md: "1.5rem" },
+                  }}
+                >
+                  Compare offers from nearby auto repair shops: prices, reviews,
+                  photos of work, and available appointments.
+                </Typography>
+              </Box>
+            )}
+
             <Filter />
           </Container>
         </Box>
