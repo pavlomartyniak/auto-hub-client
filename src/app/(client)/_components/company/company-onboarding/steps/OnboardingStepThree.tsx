@@ -2,8 +2,8 @@
 
 import { Box, Typography } from "@mui/material";
 import { Controller, useFormContext } from "react-hook-form";
-import type { CompanyOnboardingFormValues } from "@/utils/schemas/company";
 import FileDropzone from "@/components/ui/FileDropzone";
+import { CompanyOnboardingFormValues } from "@/schemas/company";
 
 export default function OnboardingStepThree() {
   const { control } = useFormContext<CompanyOnboardingFormValues>();

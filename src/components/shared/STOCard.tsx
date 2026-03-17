@@ -12,6 +12,7 @@ import BuildCircleOutlinedIcon from "@mui/icons-material/BuildCircleOutlined";
 import DirectionsCarOutlinedIcon from "@mui/icons-material/DirectionsCarOutlined";
 import { STO } from "@/types/sto";
 import { useRouter } from "next/navigation";
+import { Routes } from "@/utils/routes";
 
 // Sub-component: Image Section with Overlays
 const STOCardImage = ({
@@ -170,7 +171,8 @@ interface STOCardProps {
 
 export const STOCard = ({ sto }: STOCardProps) => {
   const router = useRouter();
-  // const navigateToDetailsPage = () => router.push(`${Routes}`)
+  const navigateToDetailsPage = () =>
+    router.push(`${Routes.STO_DETAILS_PAGE}/${sto.id}`);
 
   const mainPhoto = sto.photos?.find((p) => p.isMain) || sto.photos?.[0];
   const addressString = `${sto.address.city}, ${sto.address.street} ${sto.address.house}`;
@@ -187,7 +189,7 @@ export const STOCard = ({ sto }: STOCardProps) => {
 
   return (
     <Card
-      onClick={() => {}}
+      onClick={navigateToDetailsPage}
       elevation={0}
       sx={{
         borderRadius: 1,

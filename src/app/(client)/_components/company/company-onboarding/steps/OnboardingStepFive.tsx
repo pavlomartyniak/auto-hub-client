@@ -11,9 +11,9 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
-import type { CompanyOnboardingFormValues } from "@/utils/schemas/company";
 import { findOptionLabel } from "@/utils/helpers/findOptionLabel";
 import { serviceOptions, workPricingOptions } from "@/utils/options";
+import { CompanyOnboardingFormValues } from "@/schemas/company";
 
 const days = [
   { key: "monday", label: "Monday" },
