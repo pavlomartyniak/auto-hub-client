@@ -5,18 +5,31 @@ import { Routes } from "@/utils/routes";
 import { AppBar, Box, Container, Typography } from "@mui/material";
 import Image from "next/image";
 import NextLink from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export function Header() {
+  const router = useRouter();
   const pathname = usePathname();
+
   const isOnboarding = pathname === Routes.STO_ONBOARDING;
+
+  const navigateHome = () => {
+    router.push(Routes.HOME);
+  };
   return (
     <AppBar position="static" elevation={0}>
       <Box sx={{ bgcolor: "common.white" }} boxShadow={4}>
-        <Container sx={{ py: 1 }}>
-          <NextLink href={Routes.HOME} passHref>
-            <Image src="/logo.png" alt="Company Logo" width={150} height={50} />
-          </NextLink>
+        <Container sx={{ py: 2 }}>
+          <Typography
+            width="fit-content"
+            variant="h4"
+            fontWeight={900}
+            color="common.black"
+            onClick={navigateHome}
+            sx={{ cursor: "pointer" }}
+          >
+            AutoHub
+          </Typography>
         </Container>
       </Box>
       {!isOnboarding ? (
