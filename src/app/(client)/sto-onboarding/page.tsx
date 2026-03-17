@@ -16,17 +16,18 @@ import {
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm, type Resolver } from "react-hook-form";
-import {
-  companyOnboardingSchema,
-  defaultAvailabilityBooking,
-  type CompanyOnboardingFormValues,
-} from "@/utils/schemas/company";
+
 import OnboardingStepOne from "../_components/company/company-onboarding/steps/OnboardingStepOne";
 import OnboardingStepTwo from "../_components/company/company-onboarding/steps/OnboardingStepTwo";
 import OnboardingStepThree from "../_components/company/company-onboarding/steps/OnboardingStepThree";
 import { onboardingSteps } from "@/utils/onboarding-steps";
 import OnboardingStepFour from "../_components/company/company-onboarding/steps/OnboardingStepFour";
 import OnboardingStepFive from "../_components/company/company-onboarding/steps/OnboardingStepFive";
+import {
+  CompanyOnboardingFormValues,
+  companyOnboardingSchema,
+  defaultAvailabilityBooking,
+} from "@/schemas/company";
 
 const stepFieldsMap: Record<number, (keyof CompanyOnboardingFormValues)[]> = {
   0: ["basicInfo"],

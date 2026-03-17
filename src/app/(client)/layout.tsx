@@ -1,8 +1,7 @@
 "use client";
 
 import { Header } from "@/components/shared/Header";
-import { Footer } from "@/components/shared/Footer";
-import { Box, Container } from "@mui/material";
+import { Box } from "@mui/material";
 
 export default function ClientLayout({
   children,
@@ -11,7 +10,6 @@ export default function ClientLayout({
     <Box sx={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
       <Header />
       {children}
-      {/* <Footer /> */}
     </Box>
   );
 }
