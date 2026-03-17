@@ -10,7 +10,8 @@ export default function ClientLayout({
   return (
     <Box sx={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
       <Header />
-      <Container sx={{ flex: 1, py: 4, display: "flex" }}>{children}</Container>
+      {children}
+      {/* <Footer /> */}
     </Box>
   );
 }
