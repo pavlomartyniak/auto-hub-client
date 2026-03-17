@@ -4,7 +4,7 @@ import { Box, Typography } from "@mui/material";
 import { Controller, useFormContext } from "react-hook-form";
 import { serviceOptions, workPricingOptions } from "@/utils/options";
 import { CustomRadioGroup } from "@/components/ui/CustomRadioGroup";
-import { MultiSelect } from "@/components/ui/MultiSeclect";
+import { MultiSelect } from "@/components/ui/MultiSelect";
 
 export default function OnboardingStepTwo() {
   const { control } = useFormContext();
