@@ -28,6 +28,9 @@ export const theme = createTheme({
     body1: {
       color: "#666666",
     },
+    caption: {
+      color: "#808080",
+    },
   },
   shape: {
     borderRadius: 12,
