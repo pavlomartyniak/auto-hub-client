@@ -12,12 +12,24 @@ import {
 import EventAvailableOutlinedIcon from "@mui/icons-material/EventAvailableOutlined";
 import ScheduleOutlinedIcon from "@mui/icons-material/ScheduleOutlined";
 import { STO } from "@/types";
+import { useState } from "react";
+import StoBookingCalendarModal from "./StoBookingCalendarModal";
 
 interface Props {
   sto: STO;
 }
 
 export function StoBookingCard({ sto }: Props) {
+  const [isCalendarModalOpen, setIsCalendarModalOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setIsCalendarModalOpen(true);
+  };
+
+  const handleClose = () => {
+    setIsCalendarModalOpen(false);
+  };
+
   const { availableSlots } = sto;
 
   return (
@@ -59,20 +71,20 @@ export function StoBookingCard({ sto }: Props) {
               <Chip
                 key={index}
                 label={slot}
-                color={index === 0 ? "primary" : "default"}
-                variant={index === 0 ? "filled" : "outlined"}
+                color={"default"}
+                variant={"outlined"}
                 onClick={() => {}}
                 sx={{
-                  fontWeight: index === 0 ? 600 : 500,
+                  fontWeight: 500,
                   fontSize: "0.75rem",
                   px: 0.5,
                   py: 1,
                   borderRadius: 2,
-                  bgcolor: index === 0 ? "primary.main" : "transparent",
-                  borderColor: index !== 0 ? "grey.300" : undefined,
+                  bgcolor: "transparent",
+                  borderColor: "grey.300",
                   cursor: "pointer",
                   "&:hover": {
-                    borderColor: index !== 0 ? "grey.900" : undefined,
+                    borderColor: "grey.900",
                   },
                 }}
               />
@@ -89,12 +101,14 @@ export function StoBookingCard({ sto }: Props) {
             "& .MuiAlert-message": { fontSize: "0.8125rem" },
           }}
         >
-          No available slots for the next 3 days. Please call to book.
+          No available slots for the next 3 days. Check out other slots you
+          might like.
         </Alert>
       )}
 
       <Stack spacing={2}>
         <Button
+          onClick={handleClickOpen}
           variant="contained"
           size="medium"
           fullWidth
@@ -125,6 +139,13 @@ export function StoBookingCard({ sto }: Props) {
       >
         You won't be charged yet
       </Typography>
+
+      {isCalendarModalOpen ? (
+        <StoBookingCalendarModal
+          isOpen={isCalendarModalOpen}
+          onClose={handleClose}
+        />
+      ) : null}
     </Box>
   );
 }

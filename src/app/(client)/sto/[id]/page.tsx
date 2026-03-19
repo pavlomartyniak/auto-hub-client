@@ -32,29 +32,28 @@ export default async function StoDetailsPage(props: Props) {
     >
       <Container maxWidth="lg" sx={{ pt: { xs: 3, md: 4 } }}>
         <StoHeader sto={sto} />
-        <StoGallery photos={sto.photos} />
 
         <Box
-          display="flex"
-          flexDirection={{ xs: "column", md: "row" }}
-          gap={{ xs: 4, md: 8 }}
-          mt={{ xs: 2, md: 1 }}
+          display={{ xs: "block", lg: "none" }}
+          pb={{ xs: 3, md: 4 }}
+          minWidth={0}
         >
-          <Box
-            flex={{ xs: "1 1 auto", md: "0 0 58%", lg: "0 0 58%" }}
-            minWidth={0}
-          >
+          <StoBookingCard sto={sto} />
+        </Box>
+
+        <StoGallery photos={sto.photos} />
+
+        <Grid container spacing={4}>
+          <Grid size={{ xs: 12, lg: 7 }}>
             <StoInfo sto={sto} />
             <Divider sx={{ my: 4 }} />
             <StoReviews reviews={sto.reviews} />
-          </Box>
-          <Box
-            flex={{ xs: "1 1 auto", md: "0 0 42%", lg: "0 0 42%" }}
-            minWidth={0}
-          >
+          </Grid>
+
+          <Grid display={{ xs: "none", lg: "block" }} size={5}>
             <StoBookingCard sto={sto} />
-          </Box>
-        </Box>
+          </Grid>
+        </Grid>
       </Container>
     </Box>
   );
