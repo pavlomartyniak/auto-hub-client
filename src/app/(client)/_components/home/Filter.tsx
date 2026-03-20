@@ -25,6 +25,8 @@ import {
 } from "@/schemas/homeFilterSchema";
 import { TextField } from "@/components/ui/TextField";
 import { DatePicker } from "@/components/ui/DatePicker";
+import { SelectField } from "@/components/ui/SelectField";
+import { CAR_MAKES } from "@/utils/mocked-data";
 
 export function Filter() {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -38,7 +40,6 @@ export function Filter() {
       location: "",
       date: undefined,
       make: "",
-      model: "",
     },
   });
 
@@ -96,15 +97,7 @@ export function Filter() {
         <Typography variant="caption" color="text.secondary" fontWeight={600}>
           Make
         </Typography>
-        <TextField name="make" placeholder="e.g. BMW" size="small" />
-      </Box>
-
-      {/* Model */}
-      <Box sx={{ flex: 1, px: { xs: 0, md: 2 }, width: "100%" }}>
-        <Typography variant="caption" color="text.secondary" fontWeight={600}>
-          Model
-        </Typography>
-        <TextField name="model" placeholder="e.g. X5" size="small" />
+        <SelectField name="make" size="small" options={CAR_MAKES} />
       </Box>
 
       {/* Search Button */}
