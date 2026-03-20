@@ -22,6 +22,15 @@ export function TextField({ name, ...props }: FormTextFieldProps) {
           fullWidth
           error={Boolean(fieldState.error)}
           helperText={fieldState.error?.message ?? " "}
+          sx={{
+            "& input:-webkit-autofill": {
+              WebkitBoxShadow: (theme) =>
+                `0 0 0 100px ${theme.palette.background.paper} inset`,
+              WebkitTextFillColor: (theme) => theme.palette.text.primary,
+              caretColor: (theme) => theme.palette.text.primary,
+            },
+            ...props.sx,
+          }}
         />
       )}
     />
