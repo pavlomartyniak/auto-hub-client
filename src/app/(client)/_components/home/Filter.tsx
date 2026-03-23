@@ -25,11 +25,13 @@ import {
 } from "@/schemas/homeFilterSchema";
 import { TextField } from "@/components/ui/TextField";
 import { DatePicker } from "@/components/ui/DatePicker";
+import { SelectField } from "@/components/ui/SelectField";
+import { carMakeOptions, serviceOptions } from "@/utils/options";
+import { CarMakeEnum, ServiceOptionsEnum } from "@/utils/enum-options";
 
 export function Filter() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const theme = useTheme();
-  // We consider "mobile" any screen smaller than 'md'
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const methods = useForm<HomeFilterValues>({
@@ -37,8 +39,8 @@ export function Filter() {
     defaultValues: {
       location: "",
       date: undefined,
-      make: "",
-      model: "",
+      make: CarMakeEnum.Any,
+      serviceType: ServiceOptionsEnum.AllServices,
     },
   });
 
@@ -96,15 +98,15 @@ export function Filter() {
         <Typography variant="caption" color="text.secondary" fontWeight={600}>
           Make
         </Typography>
-        <TextField name="make" placeholder="e.g. BMW" size="small" />
+        <SelectField name="make" size="small" options={carMakeOptions} />
       </Box>
 
-      {/* Model */}
+      {/* Service Type */}
       <Box sx={{ flex: 1, px: { xs: 0, md: 2 }, width: "100%" }}>
         <Typography variant="caption" color="text.secondary" fontWeight={600}>
-          Model
+          Service Type
         </Typography>
-        <TextField name="model" placeholder="e.g. X5" size="small" />
+        <SelectField name="serviceType" size="small" options={serviceOptions} />
       </Box>
 
       {/* Search Button */}

@@ -38,7 +38,7 @@ export interface STO {
   reviewCount: number;
   isVerified: boolean;
   isPartner: boolean;
-  availableSlots?: string[];
+  availableSlots: string[];
   createdAt: string;
   updatedAt: string;
 }
