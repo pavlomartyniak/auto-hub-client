@@ -33,6 +33,7 @@ export function DatePicker({ name, ...props }: FormDatePickerProps) {
             ...props.slotProps,
             textField: {
               ...(props.slotProps?.textField as any),
+              id: `datePicker-${name}`,
               onClick: () => setOpen(true),
               onMouseDown: (e: React.MouseEvent) => {
                 e.preventDefault();

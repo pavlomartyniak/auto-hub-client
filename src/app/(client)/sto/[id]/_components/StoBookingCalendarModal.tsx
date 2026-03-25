@@ -1,5 +1,6 @@
 "use client";
 
+import { Routes } from "@/utils/routes";
 import {
   Button,
   Box,
@@ -11,6 +12,7 @@ import {
   Grid,
 } from "@mui/material";
 import { StaticDatePicker } from "@mui/x-date-pickers";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useMemo, useState, useCallback } from "react";
 
 type Props = {
@@ -43,6 +45,11 @@ const TIME_SLOTS = [
 ];
 
 export default function StoBookingCalendarModal({ isOpen, onClose }: Props) {
+  const params = useParams();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const stoId = params.id;
+
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
 
@@ -59,14 +66,17 @@ export default function StoBookingCalendarModal({ isOpen, onClose }: Props) {
   const handleBook = useCallback(() => {
     if (!selectedDate || !selectedTime) return;
 
-    // 👉 тут буде API call
-    console.log({
-      date: selectedDate,
-      time: selectedTime,
-    });
+    const params = new URLSearchParams(searchParams.toString());
+
+    params.set("bookingDate", selectedDate.toISOString());
+    params.set("bookingTime", selectedTime);
+
+    router.push(
+      `${Routes.STO_BOOK_PAGE.replace(":id", stoId as string)}?${params.toString()}`,
+    );
 
     onClose();
-  }, [selectedDate, selectedTime, onClose]);
+  }, [selectedDate, selectedTime, searchParams, stoId, onClose]);
 
   return (
     <Dialog open={isOpen} onClose={onClose} maxWidth="md" fullWidth>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -28,8 +28,12 @@ import { DatePicker } from "@/components/ui/DatePicker";
 import { SelectField } from "@/components/ui/SelectField";
 import { carMakeOptions, serviceOptions } from "@/utils/options";
 import { CarMakeEnum, ServiceOptionsEnum } from "@/utils/enum-options";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export function Filter() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
   const [drawerOpen, setDrawerOpen] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
@@ -44,10 +48,41 @@ export function Filter() {
     },
   });
 
+  useEffect(() => {
+    const location = searchParams.get("location");
+    const date = searchParams.get("date");
+    const make = searchParams.get("make");
+    const serviceType = searchParams.get("serviceType");
+
+    methods.reset({
+      location: location || "",
+      date: date ? date : undefined,
+      make: (make as CarMakeEnum) || CarMakeEnum.Any,
+      serviceType:
+        (serviceType as ServiceOptionsEnum) || ServiceOptionsEnum.AllServices,
+    });
+  }, [searchParams]);
+
   const onSubmit = (data: HomeFilterValues) => {
-    console.log("Filter Data:", data);
+    const params = new URLSearchParams();
+
+    console.log("data", data);
+
+    if (data.location) params.set("location", data.location);
+    if (data.date) params.set("date", data.date);
+    if (data.make && data.make !== CarMakeEnum.Any)
+      params.set("make", data.make);
+    if (
+      data.serviceType &&
+      data.serviceType !== ServiceOptionsEnum.AllServices
+    ) {
+      params.set("serviceType", data.serviceType);
+    }
+
+    router.push(`/?${params.toString()}`);
+
     if (isMobile) {
-      setDrawerOpen(false); // Auto-close drawer on mobile search
+      setDrawerOpen(false);
     }
   };
 
