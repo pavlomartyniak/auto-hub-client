@@ -19,6 +19,7 @@ export function TextField({ name, ...props }: FormTextFieldProps) {
         <MuiTextField
           {...field}
           {...props}
+          id={`input-${name}`}
           fullWidth
           error={Boolean(fieldState.error)}
           helperText={fieldState.error?.message ?? " "}
